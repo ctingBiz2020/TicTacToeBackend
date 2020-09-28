@@ -1,8 +1,8 @@
 package com.ting.gamestate.controller;
 
 import com.ting.gamestate.model.Moves;
+import com.ting.gamestate.model.Record;
 import com.ting.gamestate.service.ComputerService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +24,17 @@ public class Computer {
     //respond with the placement of AI move
     @PostMapping("/game")
     @ResponseStatus(HttpStatus.OK)
-    public int computerMove(@RequestBody Moves input){
+    public String computerMove(@RequestBody Moves input){
         System.out.println("AI MOVED");
-        int aiPlacement = computerService.generateComputerPlacement(input);
+        String aiPlacement = computerService.generateComputerPlacement(input);
         return aiPlacement;
+    }
+
+    @PostMapping("/win")
+    @ResponseStatus(HttpStatus.OK)
+    public int computerMove(@RequestBody Record input){
+        System.out.println("Validating...");
+        int win = computerService.validatingWinCondition(input);
+        return win;
     }
 }
