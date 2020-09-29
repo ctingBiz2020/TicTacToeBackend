@@ -4,6 +4,7 @@ import com.ting.gamestate.model.Moves;
 import com.ting.gamestate.model.Record;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -72,42 +73,46 @@ public class ComputerService {
 
   public int validatingWinCondition(Record input) {
     int result = 0;
-    List<int[]> list1 = Arrays.asList(input.getPlayerOne());
-    List<int[]> list2 = Arrays.asList(input.getPlayerTwo());
+    List<Integer> list1 = new ArrayList<Integer>();
+    List<Integer> list2 = new ArrayList<Integer>();
+
+    for(int i = 0; i < input.getPlayerOne().length; i++){
+      list1.add(input.getPlayerOne()[i]);
+    }
+
+    for(int j = 0; j < input.getPlayerTwo().length; j++){
+      list2.add(input.getPlayerTwo()[j]);
+    }
 
     if(checkList(list1) > checkList(list2))
-      result = 1;
-    else if(checkList(list1) < checkList(list2))
-      result = 2;
-    else if(checkList(list1) == checkList(list2))
-      result = 3;
-    else
-      result = 0;
+      return result = 1;
+    if(checkList(list1) < checkList(list2))
+      return result = 2;
+    if(input.getPlayerOne().length + input.getPlayerTwo().length == 9)
+      return result = 3;
 
     return result;
   }
 
   public int checkList(List data){
     int value = 0;
+    System.out.println();
     if(data.containsAll(Arrays.asList(1, 2, 3)))
       value = 1;
-    else if (data.containsAll(Arrays.asList(4, 5, 6)))
+    if(data.containsAll(Arrays.asList(4, 5, 6)))
       value = 1;
-    else if (data.containsAll(Arrays.asList(7, 8, 9)))
+    if(data.containsAll(Arrays.asList(7, 8, 9)))
       value = 1;
-    else if (data.containsAll(Arrays.asList(1, 4, 7)))
+    if(data.containsAll(Arrays.asList(1, 4, 7)))
       value = 1;
-    else if (data.containsAll(Arrays.asList(2, 5, 8)))
+    if(data.containsAll(Arrays.asList(2, 5, 8)))
       value = 1;
-    else if (data.containsAll(Arrays.asList(3, 6,9 )))
+    if(data.containsAll(Arrays.asList(3, 6, 9)))
       value = 1;
-    else if (data.containsAll(Arrays.asList(1, 5, 9)))
+    if(data.containsAll(Arrays.asList(1, 5, 9)))
       value = 1;
-    else if (data.containsAll(Arrays.asList(3, 5, 7)))
+    if(data.containsAll(Arrays.asList(3, 5, 7)))
       value = 1;
-    else
-      value = 0;
-
-    return  value;
+    return value;
   }
 }

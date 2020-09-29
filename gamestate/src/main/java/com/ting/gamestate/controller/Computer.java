@@ -34,6 +34,7 @@ public class Computer {
     @ResponseStatus(HttpStatus.OK)
     public int computerMove(@RequestBody Record input){
         System.out.println("Validating...");
+        System.out.println("input contains " + input.toString());
         int win = computerService.validatingWinCondition(input);
         return win;
     }
